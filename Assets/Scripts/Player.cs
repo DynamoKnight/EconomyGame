@@ -6,13 +6,12 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    private GameObject sword;
+    public Sword sword;
     private Vector3 originalScale;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sword = transform.GetChild(0).gameObject;
         originalScale = transform.localScale;
     }
 
@@ -46,6 +45,6 @@ public class Player : MonoBehaviour
     }
 
     public void SetSword(SwordData swordData){
-        sword.GetComponent<Sword>().SetSword(swordData);
+        sword.SetSword(swordData);
     }
 }

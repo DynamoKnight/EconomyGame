@@ -26,6 +26,7 @@ public class Sword : MonoBehaviour
 
     void Attack()
     {
+        Debug.Log("Attacking with damage: " + damage);
         foreach (Enemy enemy in new List<Enemy>(enemiesInRange))
         {
             if (enemy != null)
@@ -68,5 +69,6 @@ public class Sword : MonoBehaviour
     public void SetSword(SwordData swordData){
         this.damage = swordData.damage;
         sr.color = swordData.color;
+        Debug.Log("Sword updated to: " + swordData.name + " | Damage: " + damage);
     }
 }
