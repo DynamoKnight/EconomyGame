@@ -4,12 +4,14 @@ using System.Collections;
 
 public class Sword : MonoBehaviour
 {
-    public int damage = 1;
+    private SpriteRenderer sr;
+    public int damage = 25;
     private Quaternion originalRotation;
     
     private List<Enemy> enemiesInRange = new List<Enemy>();
 
     void Start(){
+        sr = GetComponent<SpriteRenderer>();
         originalRotation = transform.localRotation;
     }
     
@@ -61,5 +63,10 @@ public class Sword : MonoBehaviour
                 enemiesInRange.Remove(enemy);
             }
         }
+    }
+
+    public void SetSword(SwordData swordData){
+        this.damage = swordData.damage;
+        sr.color = swordData.color;
     }
 }

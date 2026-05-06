@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     private Vector2 direction;
     private Vector3 originalScale;
 
-    private float health = 1f;
+    private float health = 100f;
 
     void Start()
     {
