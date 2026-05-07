@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount = 1){
+    public void TakeDamage(int amount = 10){
         health -= amount;
         if (health <= 0){
             Destroy(gameObject);

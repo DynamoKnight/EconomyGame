@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     public List<TMP_Text> nameTexts;
 
     void Awake(){
-
         // SwordData(Name, Damage, Cost, Color)
-        Stats.swordList.Add(new SwordData("Wooden Sword",  CalculateDamage(0), 0, Color.brown)); // 27 dmg
-        Stats.swordList.Add(new SwordData("Stone Sword",   CalculateDamage(200), 5, Color.gray)); // 40 dmg
-        Stats.swordList.Add(new SwordData("Iron Sword",    CalculateDamage(400), 15, Color.white)); // 58 dmg
-        Stats.swordList.Add(new SwordData("Gold Sword",    CalculateDamage(1200), 25, Color.yellow)); // 65 dmg (THE TRAP)
-        Stats.swordList.Add(new SwordData("Diamond Sword", CalculateDamage(2500), 35, Color.cyan)); // 98 dmg
+        Stats.swordList.Add(new SwordData("Wooden Sword",  CalculateDamage(0),  0,  Color.brown));              // ~26 dmg
+        Stats.swordList.Add(new SwordData("Stone Sword",   CalculateDamage(5),  5,  Color.gray));               // ~31 dmg
+        Stats.swordList.Add(new SwordData("Iron Sword",    CalculateDamage(10), 10, Color.white));              // ~51 dmg
+        Stats.swordList.Add(new SwordData("Gold Sword",    CalculateDamage(25), 25, Color.yellow));             // ~65 dmg (THE TRAP)
+        Stats.swordList.Add(new SwordData("Diamond Sword", CalculateDamage(35), 35, Color.cyan));               // ~95 dmg
     }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         shopMenu.SetActive(false);
@@ -65,8 +65,10 @@ public class GameManager : MonoBehaviour
     public int CalculateDamage(int cost){
         // Uses a double sigmoid curve.
         float baseDmg = 25f;
-        float w1 = 35f / (1.0f + Mathf.Exp(-0.01f * (cost - 250f)));  // First hump
-        float w2 = 40f / (1.0f + Mathf.Exp(-0.005f * (cost - 1600f))); // Second hump
+        // First hump: Centers at 8 coins. Steepness increased to 0.5 for small scale.
+        float w1 = 35f / (1.0f + Mathf.Exp(-0.5f * (cost - 8f))); 
+        // Second hump: Centers at 30 coins.
+        float w2 = 40f / (1.0f + Mathf.Exp(-0.4f * (cost - 30f))); 
         
         return Mathf.RoundToInt(baseDmg + w1 + w2);
     }
